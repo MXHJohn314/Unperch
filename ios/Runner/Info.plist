@@ -45,5 +45,21 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<!-- BLE -->
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Unperch uses Bluetooth to connect to your under-desk treadmill.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Unperch uses Bluetooth to connect to your under-desk treadmill.</string>
+	<!-- Background modes -->
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>processing</string>
+		<string>bluetooth-central</string>
+		<string>audio</string>
+	</array>
+	<!-- Local notifications -->
+	<key>NSUserNotificationUsageDescription</key>
+	<string>Unperch sends reminders to drink water and exercise during your shift.</string>
 </dict>
 </plist>
