@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:unperch/core/datastore/unperch_datastore.dart';
 import 'package:unperch/features/calendar/calendar_screen.dart';
 import 'package:unperch/features/calendar/day_view_screen.dart';
+import 'package:unperch/features/home/home_screen.dart';
 import 'package:unperch/features/onboarding/onboarding_screen.dart';
 import 'package:unperch/core/enums/enums.dart';
 import 'package:unperch/features/overview/overview_screen.dart';
@@ -59,7 +60,7 @@ GoRouter _buildRouter(UnperchDataStore store) => GoRouter(
         ),
         GoRoute(
           path: AppRoutes.home,
-          builder: (context, state) => const _StubScreen(label: 'Home'),
+          builder: (context, state) => const HomeScreen(),
         ),
     GoRoute(
       path: AppRoutes.calendar,
@@ -162,25 +163,3 @@ class UnperchApp extends ConsumerWidget {
   }
 }
 
-// ---------------------------------------------------------------------------
-// Temporary stub screen — replaced by real feature screens as they are built
-// ---------------------------------------------------------------------------
-
-class _StubScreen extends StatelessWidget {
-  const _StubScreen({required this.label});
-
-  final String label;
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(label)),
-      body: Center(
-        child: Text(
-          '$label — not yet implemented',
-          style: Theme.of(context).textTheme.bodyLarge,
-        ),
-      ),
-    );
-  }
-}
