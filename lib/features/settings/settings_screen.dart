@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:unperch/core/datastore/unperch_datastore.dart';
@@ -490,11 +492,28 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           title: Text('App version'),
           trailing: Text('1.0.0'),
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-          child: Text(
-            'Unperch is free and open-source software (GPL-3.0)',
-            style: TextStyle(fontSize: 12),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          child: RichText(
+            text: TextSpan(
+              style: const TextStyle(fontSize: 12, color: Colors.white70),
+              children: [
+                const TextSpan(text: 'Unperch is free and open-source software (GPL-3.0) — '),
+                TextSpan(
+                  text: 'github.com/MXHJohn314/Unperch',
+                  style: const TextStyle(
+                    fontSize: 12,
+                    color: Color(0xFF80CBC4),
+                    decoration: TextDecoration.underline,
+                  ),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () => launchUrl(
+                          Uri.parse('https://github.com/MXHJohn314/Unperch'),
+                          mode: LaunchMode.externalApplication,
+                        ),
+                ),
+              ],
+            ),
           ),
         ),
       ],
