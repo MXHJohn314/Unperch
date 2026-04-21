@@ -7,7 +7,9 @@ import 'package:unperch/features/calendar/day_view_screen.dart';
 import 'package:unperch/features/onboarding/onboarding_screen.dart';
 import 'package:unperch/core/enums/enums.dart';
 import 'package:unperch/features/overview/overview_screen.dart';
+import 'package:unperch/features/equipment/equipment_screen.dart';
 import 'package:unperch/features/settings/settings_screen.dart';
+import 'package:unperch/features/treadmill/treadmill_screen.dart';
 
 // ---------------------------------------------------------------------------
 // Route paths
@@ -22,6 +24,7 @@ class AppRoutes {
   static const String calendar = '/calendar';
   static const String overview = '/overview';
   static const String settings = '/settings';
+  static const String equipment = '/equipment';
   static const String treadmill = '/treadmill';
 }
 
@@ -79,8 +82,12 @@ GoRouter _buildRouter(UnperchDataStore store) => GoRouter(
       builder: (context, state) => const SettingsScreen(),
     ),
     GoRoute(
+      path: AppRoutes.equipment,
+      builder: (context, state) => const EquipmentScreen(),
+    ),
+    GoRoute(
       path: AppRoutes.treadmill,
-      builder: (context, state) => const _StubScreen(label: 'Treadmill'),
+      builder: (context, state) => const TreadmillScreen(),
     ),
   ],
 );
