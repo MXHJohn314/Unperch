@@ -54,12 +54,6 @@
             android:name="flutterEmbedding"
             android:value="2" />
 
-        <!-- flutter_background_service foreground service -->
-        <service
-            android:name="id.flutter.flutter_background_service.BackgroundService"
-            android:foregroundServiceType="health"
-            android:exported="false" />
-
         <!-- Boot receiver to restart background service after reboot -->
         <receiver
             android:name="id.flutter.flutter_background_service.BootReceiver"
