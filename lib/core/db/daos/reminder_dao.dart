@@ -47,6 +47,35 @@ class ReminderDao extends DatabaseAccessor<AppDatabase>
         ..where((tbl) => tbl.id.equals(id)))
       .write(const ReminderEventsCompanion(skipped: Value(true)));
 
+  /// Returns all reminder events scheduled on [date] (local-time day boundary).
+  Future<List<ReminderEventData>> getEventsForDay(DateTime date) {
+    final startOfDay = DateTime(date.year, date.month, date.day);
+    final endOfDay = startOfDay.add(const Duration(days: 1));
+    return (select(reminderEvents)
+          ..where(
+            (tbl) =>
+                tbl.scheduledAt.isBiggerOrEqualValue(startOfDay) &
+                tbl.scheduledAt.isSmallerThanValue(endOfDay),
+          )
+          ..orderBy([(tbl) => OrderingTerm.asc(tbl.scheduledAt)]))
+        .get();
+  }
+
+  /// Returns all reminder events whose [scheduledAt] falls within
+  /// [[start], [end]).
+  Future<List<ReminderEventData>> getEventsInRange(
+    DateTime start,
+    DateTime end,
+  ) =>
+      (select(reminderEvents)
+            ..where(
+              (tbl) =>
+                  tbl.scheduledAt.isBiggerOrEqualValue(start) &
+                  tbl.scheduledAt.isSmallerThanValue(end),
+            )
+            ..orderBy([(tbl) => OrderingTerm.asc(tbl.scheduledAt)]))
+          .get();
+
   /// Deletes all reminder events scheduled before [before].
   Future<int> deleteBefore(DateTime before) =>
       (delete(reminderEvents)

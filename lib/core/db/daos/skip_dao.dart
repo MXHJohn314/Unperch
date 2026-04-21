@@ -11,6 +11,19 @@ class SkipDao extends DatabaseAccessor<AppDatabase> with _$SkipDaoMixin {
   // Queries
   // ---------------------------------------------------------------------------
 
+  /// Returns all skip records whose [createdAt] falls within [[start], [end]).
+  Future<List<SkipRecordData>> getSkipsInRange(
+    DateTime start,
+    DateTime end,
+  ) =>
+      (select(skipRecords)
+            ..where(
+              (tbl) =>
+                  tbl.createdAt.isBiggerOrEqualValue(start) &
+                  tbl.createdAt.isSmallerThanValue(end),
+            ))
+          .get();
+
   /// Returns all skip records that are currently active — i.e., either
   /// indefinite or not yet past their [expiresAt] timestamp.
   Future<List<SkipRecordData>> getActiveSkips() {
