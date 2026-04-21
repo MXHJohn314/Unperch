@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -41,8 +39,8 @@ Future<void> main() async {
   final bgManager = BackgroundServiceManager();
   await bgManager.initialize();
 
-  // 7. Schedule today if needed (non-blocking)
-  unawaited(scheduler.scheduleTodayIfNeeded());
+  // 7. Schedule today if needed — await to avoid DB lock race with first render
+  await scheduler.scheduleTodayIfNeeded();
 
   runApp(
     ProviderScope(
